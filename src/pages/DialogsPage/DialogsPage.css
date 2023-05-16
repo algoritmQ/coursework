@@ -1,0 +1,14 @@
+.dialogsPage{
+    
+    display:flex;  
+    justify-content: flex-start;
+    align-items: center;
+    width:900px;
+    min-height: 100px;
+    flex-direction: column;
+    font-size: 60px;
+    gap:15px;
+}
+.dialogsPage .title{
+    font-size: 32px;
+}

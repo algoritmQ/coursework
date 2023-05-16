@@ -1,0 +1,58 @@
+.chatAd{
+    border-radius: 4px;
+    width: 870px;
+    height: 110px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    gap:6px;
+}
+.chatAd .avatarBar{
+    display: flex;
+    background-color: hsl(0, 0%, 98%);
+    width: 146px;
+    height: 110px;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+    justify-content: center;
+}
+.chatAd .infoBar{
+    
+    width:578px;
+    height:110px;
+    display:flex;
+    flex-direction: column;
+    padding-left: 8px;
+}
+
+.infoBar .personName{
+    font-size:22px;
+}
+.infoBar .nameAdPrice{
+    font-size:18px;
+    color:#0B107E;
+}
+
+.chatAd .rightBar{
+    
+    width:130px;
+    height:110px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap:4px;
+}
+
+.dateTime{
+    color:rgba(0,0,0,0.7);
+    font-size:16px;
+}
+.sellOrBuy{
+    color:rgba(0,0,0,0.5);
+    font-size:16px;
+}

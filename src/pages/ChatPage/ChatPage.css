@@ -1,0 +1,87 @@
+.chatPage{
+    width:870px;
+    height:800px;
+    border:1px solid green;
+    border-radius:4px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap:15px;
+}
+
+
+.chatPage .sendField{
+    border: 1px solid grey;
+    width: 850px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.myInput{
+    width:730px;
+    height:55px;
+    background-color: white;
+    border-radius: 20px 0 0 20px;
+}
+input{
+    border:none;
+    width:750px;
+    height:55px;
+}
+
+.chatPage .chatField{
+    background-color: white;
+    width:850px;
+    height:570px;
+    border-radius: 10px;
+    display:flex;
+    flex-direction: column-reverse;
+    gap:9px;
+    padding-bottom:10px;
+    overflow: auto;
+}
+/*
+.message{
+    display:inline-block;
+    font-size: 18px;
+    align-items: center;
+    padding: 3px;
+    background-color:rgba(180,230,255,0.8);
+    border-radius: 5px;
+    width:auto;
+    margin-left:10px;
+    margin-right:10px;
+}*/
+
+.message {
+    /*правила для ширины сообщений*/  
+    display:block;
+    float:right;
+    clear:both;/*перенос строки после нового эл-та */   
+    background-color:rgba(175,255,155,0.8);
+    margin: 4px 0;
+    padding: 10px;
+    border-radius:4px 4px 0 4px;
+    margin-right:10px;
+    text-align:right;
+    overflow-wrap: anywhere;
+    position:relative;
+    align-self:flex-end;
+}
+.getMessage {
+    /*правила для ширины сообщений*/  
+    display:block;
+    float:right;
+    clear:both;/*перенос строки после нового эл-та */   
+    background-color:rgba(180,230,255,0.8);
+    margin: 4px 0;
+    padding: 10px;
+    border-radius:4px 4px 4px 0;
+    margin-left:10px;
+    text-align:right;
+    overflow-wrap: anywhere;
+    position:relative;
+    align-self:flex-start;
+}
