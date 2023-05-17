@@ -16,9 +16,9 @@ function HeaderReg({autorized, setAutorized}) {
   return (
     <div class = "Header">
         <div className = 'rightBar'>
-            <Link className = "my-link" style={{color: 'white'}}>Чаты</Link>
-            <Link className = "my-link" style={{color: 'white'}}>Мои объявления</Link>
-            <Link className = "my-link" style={{color: 'white'}}><BtnBlue50Rect className = "font-roboto" name="Продать что-нибудь"/></Link>
+            <Link to = "/DialogsPage" className = "my-link" style={{color: 'white'}}><span id = "rr">Чаты</span></Link>
+            <Link to = "/UserInfoPage" className = "my-link" style={{color: 'white'}}><span id = "rr2">Мои объявления</span></Link>
+            <Link to = "/AdditionAdPage" className = "my-link" style={{color: 'white'}}><BtnBlue50Rect className = "font-roboto" name="Продать что-нибудь"/></Link>
         </div> 
         <div className = "leftBar">
         <Avatar_n_Profile autorized={autorized} setAutorized = {setAutorized} />

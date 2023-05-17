@@ -10,3 +10,6 @@
     border-radius: 20px;
     color:#FFFFFF;
 }
+.btnBlueRounded:hover{
+    background-color: rgba(19, 182, 27, 0.815);
+}

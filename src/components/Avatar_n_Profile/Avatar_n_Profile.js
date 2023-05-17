@@ -11,7 +11,7 @@ function Avatar_n_Profile({autorized, setAutorized}) {
       <div className = "links">
         <Link id = "l1"> <span>Фамилия</span> <span>Имя</span></Link>
         <br/>
-        <span id = "l2" onClick = {() => {setAutorized(false)}}>Выйти из профиля</span>
+        <Link to = "/MainPage"><span id = "l2" onClick = {() => {setAutorized(false)}}>Выйти из профиля</span></Link>
       </div>
     </div>
   );

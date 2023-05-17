@@ -35,9 +35,10 @@ Link{
 Link:active{
     color:white;
 }
-Link:hover{
-    color:white;
+
+#rr:hover{
+    color:rgba(245, 14, 14, 0.7);
 }
-Link:focus{
-    color:white;
+#rr2:hover{
+    color:rgba(245, 14, 14, 0.7);
 }

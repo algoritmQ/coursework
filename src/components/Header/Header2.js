@@ -7,7 +7,7 @@ function Header2(props) {
     return (
       <div class = "Header2">
         <div className="left">
-          <Link className = "my-link">
+          <Link to = "/MainPage" className = "my-link">
             <span className="logo">         
               <span className="font-rampart-one" style = {{color: '#1B2D8C'}}>G</span>
               <span className="font-rampart-one" style = {{color: '#1B6D14'}}>F</span>

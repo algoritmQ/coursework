@@ -22,7 +22,6 @@ import UserInfoPage from './pages/UserInfoPage/UserInfoPage';
 import MainPage from './pages/MainPage/MainPage';
 
 export const App = () => {
-  const[deletuser, setmUser] = useState(false);
   const dispatch = useDispatch();
   const [autorized, setAutorized] = useState(useSelector((store) => store.user.autorized));
   
@@ -39,10 +38,7 @@ export const App = () => {
         <Header autorized={autorized} setAutorized = {setAutorized} />
       }
       <Header2/> 
-      <button onClick = {() => {setAutorized(!autorized)}
-      }>
-        нажми меня
-      </button>  
+      
       <div class = "mainContent">
         <Routes>
          <Route path = '/' element = {<MainPage/>} /> 

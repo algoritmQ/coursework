@@ -12,3 +12,6 @@
     border-radius: 0px 20px 20px 0px;
     color:#FFFFFF;
 }
+.btnBlueMainSearch:hover{
+    background-color: rgba(19, 182, 27, 0.815);
+}
