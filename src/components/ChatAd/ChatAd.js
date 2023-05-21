@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 function ChatAd(props) {
   return (
+    
     <div class = "chatAd">
        <div className = "avatarBar">фото объявления</div>
        <div className = "infoBar">
@@ -20,6 +21,7 @@ function ChatAd(props) {
             <span className = "sellOrBuy">Статус отправителя</span>
        </div>
     </div>
+    
   );
 }
 

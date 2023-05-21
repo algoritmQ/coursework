@@ -15,7 +15,6 @@
 }
 
 .additionAdPage .addField{
-    
     height:1130px;
     width:1170px;
     display:flex;
@@ -31,6 +30,7 @@
     height:280px;
     justify-content: flex-start
 }
+
 .addField .names{
     display:flex;
     flex-direction: column;

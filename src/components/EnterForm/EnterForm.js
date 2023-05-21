@@ -13,12 +13,16 @@ function EnterForm({autorized, setAutorized}) {
   }, [dispatch, autorized]
   );
   return (
-    <div class = "enterForm">
-        <span class = "title">Вход</span>
-        <input className = "font-roboto" placeholder='Логин'/>
-        <input className = "font-roboto" placeholder='Пароль' type="password"/>
-        <Link className="my-link" onClick = {() => {setAutorized(true)}}><BtnBlue38Rect name = "Войти"/></Link>
-    </div>
+    <>
+      <form>
+        <div class = "enterForm">
+            <span class = "title">Вход</span>
+              <input className = "font-roboto" placeholder='Логин'/>
+              <input className = "font-roboto" placeholder='Пароль' type="password"/>
+              <Link className="my-link" onClick = {() => {setAutorized(true)}}><BtnBlue38Rect name = "Войти"/></Link>            
+        </div>
+      </form>
+    </>
   );
 }
 

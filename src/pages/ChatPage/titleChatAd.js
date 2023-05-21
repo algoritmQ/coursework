@@ -13,7 +13,7 @@ function TitleChatAd(props) {
        </div>
        <div className = "rightBar">
             <span className = "sellOrBuy" style={{fontSize:'14px'}}>Вы покупатель</span>
-            <BtnRedRect name = "Удалить диалог"/>
+            <div><BtnRedRect name = "Удалить диалог"/></div>
        </div>
     </div>
   );

@@ -1,6 +1,18 @@
-import React, { useContext } from 'react';
 import styled from 'styled-components';
+import React, { useState, useEffect, useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import SearchForm from '../SearchForm/SearchForm';
+
+const SearchFormhere = styled.div`
+  position:absolute;
+  right:11%;
+  top:163px;
+  display:flex;
+  width:275px;
+  height:290px;
+  
+`;
 const MenuButton = styled.button`
   display: block;
   transform-origin: 16px 11px;
@@ -9,6 +21,7 @@ const MenuButton = styled.button`
   border: 0;
   padding: 0px;
   background: none;
+  cursor: pointer;
 
   span {
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -61,12 +74,21 @@ const Bar = styled.span`
 `;
 
 const HamburgerButton = () => {
+  const[zInd, setzInd] = useState(-1);
+  const dispatch = useDispatch();
   return (
-    <MenuButton>
-      <Bar />
-      <Bar />
-      <Bar />
-    </MenuButton>
+    <>
+      <div onClick={() => setzInd((-1)*zInd)}>
+        <MenuButton>
+          <Bar />
+          <Bar />
+          <Bar />
+        </MenuButton>
+      </div>
+      <SearchFormhere style = {{zIndex:zInd}}>
+        <SearchForm/>
+      </SearchFormhere>
+    </>
   );
 };
 

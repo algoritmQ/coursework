@@ -20,6 +20,8 @@ import ChatPage from './pages/ChatPage/ChatPage';
 import AdditionAdPage from './pages/AdditionAdPage/AdditionAdPage';
 import UserInfoPage from './pages/UserInfoPage/UserInfoPage';
 import MainPage from './pages/MainPage/MainPage';
+import EditProfilePage from './pages/EditProfilePage/EditProfilePage';
+
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -49,6 +51,7 @@ export const App = () => {
          <Route path = '/DialogsPage/ChatPage' element = {<ChatPage/>} />
          <Route path = '/AdditionAdPage' element = {<AdditionAdPage/>} />
          <Route path = '/UserInfoPage' element = {<UserInfoPage/>} />
+         <Route path = '/EditProfilePage' element = {<EditProfilePage/>} />
         </Routes>
               
       </div>

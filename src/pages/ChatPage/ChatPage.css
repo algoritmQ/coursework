@@ -85,3 +85,13 @@ input{
     position:relative;
     align-self:flex-start;
 }
+.getMessage div{
+    font-size: 14px;
+    color:#00000092;
+    display:flex;
+}
+.message div{
+    font-size: 14px;
+    color:#00000092;
+    
+}

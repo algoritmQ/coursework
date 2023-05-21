@@ -8,9 +8,7 @@ function DialogsPage(props) {
   return (
     <div class = "dialogsPage">
        <span className = "title">Чаты с пользователями</span>
-       <ChatAd/>
-       <ChatAd/>
-       <ChatAd/>  
+       <Link to = "/DialogsPage/ChatPage"><ChatAd/></Link>
     </div>
   );
 }

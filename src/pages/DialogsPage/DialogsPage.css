@@ -12,3 +12,7 @@
 .dialogsPage .title{
     font-size: 32px;
 }
+
+.dialogsPage a{
+    text-decoration:none;
+}
