@@ -52,13 +52,16 @@
     flex-direction:row;
     justify-content: space-between;
     width:725px;
-    height:104px;  
+    height:90px;  
 }
 .informationBar .topBar .price_n_name{
     display:flex;
     flex-direction:column;
     width:537px;
     height:54px;
+}
+.informationBar .topBar .price_n_name:hover{
+    background-color: #dedede;
 }
 
 .price_n_name .adName{
@@ -76,6 +79,10 @@
     height:50px;
     font-size: 16px;
     color:rgba(0,0,0,0.7);
+}
+.category_ad{
+    color:rgba(0,0,0,0.7);
+    margin-bottom: 10px;
 }
 
 .topBar .sellerBar{

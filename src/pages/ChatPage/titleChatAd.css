@@ -5,10 +5,11 @@
     background-color:#F7F7F7;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    
     align-items: center;
     font-size: 18px;
     gap:6px;
+    justify-content: space-around;
 }
 
 .chatAd .leftBar{
@@ -27,7 +28,7 @@
     justify-content: center;
 }
 .chatAd .infoBar{
-    width: 530px;
+    width: 400px;
     height: 90px;
     display: flex;
     flex-direction: column;
@@ -61,4 +62,21 @@
 .sellOrBuy{
     color:rgba(0,0,0,0.5);
     font-size:16px;
+}
+.strelka{
+    /* border: 0.2px solid red; */
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.strelka img{
+    width:40px;
+    height:40px;
+}
+.strelka img:hover{
+    width:45px;
+    height:45px;
 }

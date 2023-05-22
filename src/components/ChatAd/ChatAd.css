@@ -20,19 +20,20 @@
     flex-direction: row;
     justify-content: center;
 }
-.chatAd .infoBar{
+.chatAd .infoBar2{
     
     width:578px;
     height:110px;
     display:flex;
     flex-direction: column;
+    justify-content: flex-start;
     padding-left: 8px;
 }
 
-.infoBar .personName{
+.infoBar2 .personName{
     font-size:22px;
 }
-.infoBar .nameAdPrice{
+.infoBar2 .nameAdPrice{
     font-size:18px;
     color:#0B107E;
 }

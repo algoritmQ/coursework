@@ -40,7 +40,8 @@ function ChatPage(props) {
         <div className = "chatField" id = "chatField">
           <div  className = "getMessage">
             ПЕРВОЕ СООБЩЕНИЕ
-            <div>14:05</div></div>
+            <div>14:05</div>
+          </div>
           <div  className = "getMessage">ПЕРВОЕ СООБЩЕНИЕ</div>
           <div className = "message">ВТорое сообщение<div>14:05</div></div>
           <div  className = "getMessage">ПЕРВОЕ СООБЩЕНИЕ</div>

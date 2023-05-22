@@ -20,7 +20,7 @@ function Header2(props) {
           <div className="search-field">
             <input className="font-roboto" placeholder='Поиск объявлений'/><HamburgerButton/>
           </div>
-          <Link className = "my-link"><BtnBlueMainSearch className = "font-roboto" name ="Начать поиск"/></Link>
+          <Link to ="/MainPage" className = "my-link"><BtnBlueMainSearch className = "font-roboto" name ="Начать поиск"/></Link>
         </div>
       </div>
     );

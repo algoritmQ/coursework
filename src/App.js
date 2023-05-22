@@ -43,15 +43,15 @@ export const App = () => {
       
       <div class = "mainContent">
         <Routes>
-         <Route path = '/' element = {<MainPage/>} /> 
+         <Route path = '/MainPage' element = {<MainPage/>} /> 
          <Route path = '/RegForm' element = {<RegForm/>} />
          <Route path = '/EnterForm' element = {<EnterForm/>} />
-         <Route path = '/ViewAdPage' element = {<ViewAdPage/>} />
+         <Route path = '/ViewAdPage/:id' element = {<ViewAdPage/>} />
          <Route path = '/DialogsPage' element = {<DialogsPage/>} />
          <Route path = '/DialogsPage/ChatPage' element = {<ChatPage/>} />
          <Route path = '/AdditionAdPage' element = {<AdditionAdPage/>} />
          <Route path = '/UserInfoPage' element = {<UserInfoPage/>} />
-         <Route path = '/EditProfilePage' element = {<EditProfilePage/>} />
+         
         </Routes>
               
       </div>

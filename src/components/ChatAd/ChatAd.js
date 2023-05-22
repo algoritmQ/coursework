@@ -8,9 +8,8 @@ function ChatAd(props) {
     
     <div class = "chatAd">
        <div className = "avatarBar">фото объявления</div>
-       <div className = "infoBar">
+       <div className = "infoBar2">
             <span className = "personName">Имя</span>
-            <span className = "nameAdPrice">название - цена</span>
             <div className = "lastMsg">
             Кто: <span style = {{color:'rgba(0,0,0,0.7)'}}></span>
             </div>

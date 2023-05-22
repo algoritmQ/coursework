@@ -11,6 +11,7 @@ const SearchFormhere = styled.div`
   display:flex;
   width:275px;
   height:290px;
+  background-color:#F7F7F7;
   
 `;
 const MenuButton = styled.button`

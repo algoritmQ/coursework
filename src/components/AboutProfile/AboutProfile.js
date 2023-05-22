@@ -9,7 +9,7 @@ function AboutProfile(props) {
         
             <div className = "topBar">
                 <div className="leftBarAvatar">
-                    здесь должно быть ваше фото
+                    
                 </div>
                 <div className = "rightBar">
                     <span className = "title">Информация о пользователе</span>
@@ -30,8 +30,8 @@ function AboutProfile(props) {
                 </div>
             </div>
             <div className = "bottomBar">
-            <div className="my-button"><BtnBlcknWRect name = "Редактировать профиль"/></div>
-            <div className = "profile-link">Объявлений: </div>
+            <div className="my-button"></div>
+            
             </div>       
     </div>
   );

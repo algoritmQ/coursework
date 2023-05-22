@@ -20,7 +20,6 @@ const userSlice = createSlice({
         state.user = {};
         alert('Не авторизован');
     }
-
     }
 });
 export const userReducer = userSlice.reducer;

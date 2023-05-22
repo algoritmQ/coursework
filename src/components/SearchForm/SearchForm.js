@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Select from 'react-select';
 
 const DivSearchForm = styled.div`
   display: flex;
@@ -13,6 +14,15 @@ const DivSearchForm = styled.div`
 
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 
+  select{
+    height:30px;
+    width:206px;
+  }
+  #regSelect{
+    height:30px;
+    width:206px;
+    font-size:15px;
+  }
   span{
     font-size:20px;
   }
@@ -46,6 +56,15 @@ const DivSearchForm = styled.div`
   }
 `;
 
+const selectableCities = [
+  { value: '1', label: 'Москва' },
+  { value: 'Санкт-Петербург', label: 'Санкт-Петербург' },
+  { value: 'Воронеж', label: 'Воронеж' },
+  { value: 'Вологда', label: 'Вологда' }
+]
+
+
+
 const SearchForm = () => {
   return (
     <form>
@@ -53,15 +72,11 @@ const SearchForm = () => {
         <span>Парамерты поиска</span>
         
           <input type='text' placeHolder = 'Название'/>
-          <select >
-                <option value="">Выберите категорию</option>
-                <option value="dog">Dog</option>
-                <option value="cat">Cat</option>
-                <option value="hamster">Hamster</option>
-                <option value="parrot">Parrot</option>
-                <option value="spider">Spider</option>
-                <option value="goldfish">Goldfish</option>
-            </select>
+          <Select
+            id="regSelect"
+            placeholder= "Категория"
+            options={selectableCities}
+          />
             <div className = "tsena">
               <span style = {{fontSize: '16px', color:'rgba(0,0,0,0.9)'}}>Цена</span>
             </div>
@@ -70,15 +85,7 @@ const SearchForm = () => {
               <input className = 'lilInput' type='text' placeHolder = 'от'/>
               <input className = 'lilInput' type='text' placeHolder = 'до'/>
             </div>
-            <select >
-                <option value="">Выберите город</option>
-                <option value="dog">Москва</option>
-                <option value="cat">Санкт-Петербург</option>
-                <option value="hamster">Воронеж</option>
-                <option value="parrot">Севастополь</option>
-                <option value="spider">Артемовск</option>
-                <option value="goldfish">Казань</option>
-            </select>
+            <input type='text' placeHolder = 'Город'/>
         
     </DivSearchForm>
     </form>

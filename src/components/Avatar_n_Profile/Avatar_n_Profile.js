@@ -9,7 +9,7 @@ function Avatar_n_Profile({autorized, setAutorized}) {
         Ава
       </div>
       <div className = "links">
-        <Link to ="/EditProfilePage" id = "l1"> <span>Фамилия</span> <span>Имя</span></Link>
+         <span id = "l1">Фамилия</span> <span id = "l1">Имя</span>
         <br/>
         <Link to = "/MainPage"><span id = "l2" onClick = {() => {setAutorized(false)}}>Выйти из профиля</span></Link>
       </div>
