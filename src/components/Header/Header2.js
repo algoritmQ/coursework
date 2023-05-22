@@ -18,9 +18,9 @@ function Header2(props) {
        
         <div className="middle">
           <div className="search-field">
-            <input className="font-roboto" placeholder='Поиск объявлений'/><HamburgerButton/>
+            <input className="font-roboto js-mainSearch" placeholder='Поиск объявлений'/><HamburgerButton/>
           </div>
-          <Link to ="/MainPage" className = "my-link"><BtnBlueMainSearch className = "font-roboto" name ="Начать поиск"/></Link>
+          <Link to ="/MainPage" className = "my-link"><div className='js-submitDiv'><BtnBlueMainSearch className = "font-roboto" name ="Начать поиск"/></div></Link>
         </div>
       </div>
     );

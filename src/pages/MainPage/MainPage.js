@@ -28,7 +28,16 @@ function MainPage() {
       fetchAds();
   }, [dispatch]);
 
-  // const input = document.querySelector('');
+  // setTimeout(() => {
+  //   const input = document.querySelector('.js-mainSearch');
+  //   const btn = document.querySelector('.js-submitDiv');
+  
+  //   btn.addEventListener('click', (e) => {
+  //     // e.stopPropagation();
+  //     //e.preventDefault();
+  //     console.log('click!!!!!!!!!!!!!!!!!!!!');
+  //   })
+  // }, 200)
 
   const[user, setUser] = useState(false);
   return (

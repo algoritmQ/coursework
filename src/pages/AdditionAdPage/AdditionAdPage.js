@@ -13,6 +13,9 @@ const selectableOptions = [
 ]
 
 function AdditionAdPage(props) {
+  function createItem() {
+    console.log('AYE');
+  }
   return (
     <div class = "additionAdPage">
       <form>
@@ -68,7 +71,7 @@ function AdditionAdPage(props) {
           <div className = "largeDescription">
             <span>Подробное описание</span>
             <textarea></textarea>     
-            <div><BtnBlue50Rect name = "Добавить объявление" widd = "210px"/></div>      
+            <div onClick={createItem}><BtnBlue50Rect name = "Добавить объявление" widd = "210px"/></div>      
           </div>
           
         </div>
