@@ -12,7 +12,6 @@ import EnterForm from '../../components/EnterForm/EnterForm';
 import axiosInstance from '../../api/api.js';
 
 
-
 function MainPage() {
   const dispatch = useDispatch();
   const { ads } = useSelector(store => store.ads);

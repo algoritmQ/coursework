@@ -1,27 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axiosInstance from '../../api/api.js';
-import { setCategories } from '../../store/reducers/categoriesReducer';
+import { setCategories } from '../../store/reducers/categoriesReducer.js';
 
 import './AdditionAdPage.css';
 import '../.././index.css';
-import BtnBlue50Rect from '../../components/buttons/BtnBlue50Rect'
+import BtnBlue50Rect from '../../components/buttons/BtnBlue50Rect.js';
+import BtnRedRect from '../../components/buttons/BtnRedRect.js';
 import { Link } from 'react-router-dom';
-import BtnGreyRect from '../../components/buttons/BtnGreyRect';
+import BtnGreyRect from '../../components/buttons/BtnGreyRect.js';
 import Select from 'react-select';
 
 
-function AdditionAdPage(props) {
+function ChangeAdPage(...props) {
     let arrCategories = []; 
     const dispatch = useDispatch();
     const { categories } = useSelector(store => store.categories);
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
-    const [shortDescription, setShortDescription] = useState('');
-    const [fullDescription, setFullDescription] = useState('');
-    const [category, setCategory] = useState('');
-    const [categoryId, setCategoryId] = useState(0);
-
 
     useEffect(() => {
       const fetchCategories = async () => {
@@ -32,23 +26,16 @@ function AdditionAdPage(props) {
         });
       }
       fetchCategories();
+      //console.log(categories);   
+       
   }, [dispatch]);
   function appendCat(v, l){
     const cat = {value: v, label: l};
     arrCategories.push(cat);
   }
   categories.forEach(element => appendCat(element.id, element.title)); 
-  async function createItem() {
-    await axiosInstance.post('ads/', {
-      'title': name,
-      'category': 1,
-      'price': price,
-      'short_description': shortDescription,
-      'full_description': fullDescription,
-      'user_id': 1,
-    })
-    .then(response => console.log(response))
-    .catch(error => console.error);
+  function createItem() {
+    console.log('товар добавлен');
   }
 
     return (
@@ -67,30 +54,29 @@ function AdditionAdPage(props) {
               <div className = "oneField2">
                 <Select id = "my-select"
                   className="input-cont"
-                  placeholder= "Категория"
+                  placeholder= {props.category}
                   options={arrCategories}
-                  label={category}
-                  onChange={e => setCategory(e.label)}   
                 />
               </div>
               <div className = "oneField2">
-                <input placeholder = "name" value={name} onChange={e => setName(e.target.value)}/>
+                <input placeholder = {props.title}/>
               </div>
-              <div className = "oneField2"><input placeholder = "price" value={price} onChange={e => setPrice(e.target.value)}/></div>
+              <div className = "oneField2"><input placeholder = {props.price}/></div>
               <div className = "bigField2">
                 <div className = "knopka">
                   <label for = "addImage">
                     <BtnGreyRect/>
                   </label>
-                  <input
+                  <input 
                     id = "addImage"
-                    type ="file"
+                    type="file"
                     name = "addImage"  
                   />
                   
                 </div>
                 <div className = "fieldPhotos">
                   <div className = "onePhoto"></div>
+                  
                 </div>
 
               </div>
@@ -99,12 +85,13 @@ function AdditionAdPage(props) {
           <div className = "textAreas">
             <div className = "shortDescription">
               <span>Краткое описание</span>
-              <textarea value={shortDescription} onChange={e => setShortDescription(e.target.value)}></textarea>
+              <textarea>{props.short_description}</textarea>
             </div>
             <div className = "largeDescription">
               <span>Подробное описание</span>
-              <textarea value={fullDescription} onChange={e => setFullDescription(e.target.value)}></textarea>     
-              <div onClick={createItem}><BtnBlue50Rect name = "Добавить объявление" widd = "210px"/></div>      
+              <textarea>{props.full_description}</textarea>     
+              <div onClick={createItem}><BtnBlue50Rect name = "Добавить объявление" widd = "210px"/></div>  
+              <div className = "deleteBtn" ><BtnRedRect name = "Удалить объявление" widd = "200px" size = "20px"/></div>
             </div>
             
           </div>
@@ -115,4 +102,4 @@ function AdditionAdPage(props) {
     );
 }
 
-export default AdditionAdPage;
+export default ChangeAdPage;

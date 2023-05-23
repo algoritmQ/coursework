@@ -62,12 +62,6 @@
     font-size:11px;
 }
 
-.bottomBar{
-    /*border:1px solid yellow;*/
-    width:200px;
-    height:60px;
-    padding-left:5px;    
-}
 
 .profile-link{
     font-size: 14px;
@@ -75,6 +69,14 @@
     text-decoration: none;
 }
 
+
+
+.bottomBar{
+    /* border:1px solid yellow; */
+    width:200px;
+    height:60px;
+    padding-left:5px;    
+}
 .my-button{
     /*border:1px solid red;*/
     display: inline-block;

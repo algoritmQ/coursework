@@ -32,13 +32,13 @@ function Header({autorized, setAutorized}) {
     <div  className = "inactiveDiv" style = {{zIndex:zEnter}}>
       <div className = "closeForm" onClick={() => setzEnter(-1)}><span>Закрыть</span></div>
       <div className = "insideBlock" >
-        <EnterForm autorized={autorized} setAutorized = {setAutorized}/>
+        <EnterForm zEnter={zEnter} setzEnter={setzEnter}  autorized={autorized} setAutorized={setAutorized}/>
       </div>     
     </div>
     <div  className = "inactiveDiv" style = {{zIndex:zReg}}>
       <div className = "closeForm" onClick={() => setzReg(-1)}><span>Закрыть</span></div>
       <div className = "insideBlock" >
-        <RegForm/>
+        <RegForm setzReg = {setzReg}/>
       </div>     
     </div>
     </>

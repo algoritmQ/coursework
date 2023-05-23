@@ -8,17 +8,16 @@ const userSlice = createSlice({
     reducers: {
     setAuth: (state, {payload}) => {
         state.autorized = true;
-        alert('Авторизован');
+        localStorage.setItem('access', payload.access);
     },
     setUser: (state, {payload}) => {
-        state.user = payload.data;
         state.autorized = true;
-        alert('Юзер');
+        state.user = payload;
     },
     logout: (state) => {
         state.autorized = false;
         state.user = {};
-        alert('Не авторизован');
+        localStorage.removeItem('access');
     }
     }
 });

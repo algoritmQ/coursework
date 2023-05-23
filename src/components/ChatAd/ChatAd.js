@@ -1,13 +1,22 @@
+import React, {useEffect, useState} from 'react';
+import { Link } from 'react-router-dom';
+
 import './ChatAd.css';
 import '../.././index.css';
 
-import { Link } from 'react-router-dom';
-
 function ChatAd(props) {
+  const [status, setStatus] = useState('seller');
+  const handleActive = () =>{
+    setStatus('buyer');
+  }
+  const handleNoActive = () =>{
+      setStatus('seller')
+  }
+
   return (
     
     <div class = "chatAd">
-       <div className = "avatarBar">фото объявления</div>
+       <div className = "avatarBar"></div>
        <div className = "infoBar2">
             <span className = "personName">Имя</span>
             <div className = "lastMsg">
@@ -17,7 +26,9 @@ function ChatAd(props) {
        <div className = "rightBar">
             <span className = "dateTime">Вчера</span>
             <span className = "dateTime">18:01</span>
-            <span className = "sellOrBuy">Статус отправителя</span>
+            {!!(status=="buyer") ? (<span className = "sellOrBuy">Вы покупатель</span>) 
+            : (<span className = "sellOrBuy">Вы продавец</span>)
+          }
        </div>
     </div>
     

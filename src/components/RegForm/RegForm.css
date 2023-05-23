@@ -2,13 +2,14 @@
     padding-top: 30px;
     display: flex;
     width: 440px;
-    height: 460px;
+    min-height: 460px;
     background-color: #F7F7F7;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     gap:20px;
     border:1px solid green;
+    padding-bottom:20px;
 }
 
 .regForm .title{

@@ -18,23 +18,33 @@ import ViewAdPage from './pages/ViewAdPage/ViewAdPage';
 import DialogsPage from './pages/DialogsPage/DialogsPage';
 import ChatPage from './pages/ChatPage/ChatPage';
 import AdditionAdPage from './pages/AdditionAdPage/AdditionAdPage';
+import ChangeAdPage from './pages/AdditionAdPage/ChangeAdPage';
 import UserInfoPage from './pages/UserInfoPage/UserInfoPage';
 import MainPage from './pages/MainPage/MainPage';
 import EditProfilePage from './pages/EditProfilePage/EditProfilePage';
+import axiosInstance from './api/api';
 
 
 export const App = () => {
   const dispatch = useDispatch();
-  const [autorized, setAutorized] = useState(useSelector((store) => store.user.autorized));
+  const [autorized, setAutorized] = useState(useSelector(store => store.user.autorized));
   
-  useEffect( () => {
-    console.log('user changed');
-  }, [dispatch, autorized]
-  );
+  useEffect(() => {
+    async function getMe() {
+      await axiosInstance.get('api/whoami/')
+      .then(response => {
+        dispatch(setUser(response.data.data));
+        setAutorized(true);
+      })
+      .catch(error => console.error(error));
+    }
+      if (localStorage.getItem('access')) {
+        getMe();        
+      }
+  }, [dispatch]); //, autorized
 
   return (
     <div class = "bodyWrapper"> 
-    {console.log(autorized)}
       {autorized ? 
         <HeaderReg autorized={autorized} setAutorized = {setAutorized}/> : 
         <Header autorized={autorized} setAutorized = {setAutorized} />
@@ -50,6 +60,8 @@ export const App = () => {
          <Route path = '/DialogsPage' element = {<DialogsPage/>} />
          <Route path = '/DialogsPage/ChatPage' element = {<ChatPage/>} />
          <Route path = '/AdditionAdPage' element = {<AdditionAdPage/>} />
+
+         <Route path = '/ChangeAdPage' element = {<ChangeAdPage/>} />
          <Route path = '/UserInfoPage' element = {<UserInfoPage/>} />
          
         </Routes>
