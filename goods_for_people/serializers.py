@@ -23,10 +23,24 @@ class AdSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class AdDepthSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ad
+        fields = '__all__'
+        depth = 2
+
+
 class ChatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chat
         fields = '__all__'
+
+
+class ChatDepthSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Chat
+        fields = '__all__'
+        depth = 2
 
 
 class MessageSerializer(serializers.ModelSerializer):

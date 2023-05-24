@@ -22,7 +22,7 @@ class Ad(models.Model):
     publication_date = models.DateTimeField(auto_now_add=True)
     short_description = models.CharField(max_length=200, null=True, blank=True)
     full_description = models.TextField(max_length=1000, null=True, blank=True)
-    photo = models.CharField(max_length=255, null=True, blank=True)
+    photo = models.ImageField(upload_to='uploads/', blank=True, null=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='A')
     user_id = models.ForeignKey(Profile, models.CASCADE)
 

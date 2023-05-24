@@ -159,6 +159,9 @@ CORS_ORIGIN_WHITELIST = [
  'http://127.0.0.1:8000',
 ]
 
+MEDIA_URL = 'uploads/'
+MEDIA_ROOT = BASE_DIR / 'uploads/'
+
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
