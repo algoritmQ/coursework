@@ -8,6 +8,10 @@
     background-color: white;
     border-radius: 4px;
     border:1px solid black;
-    color:#FFFFFF;
+    
 }
 
+.btnBlcknWRect:hover{
+    border:1px solid rgb(255, 2, 2);
+    color:rgb(246, 0, 0);
+}

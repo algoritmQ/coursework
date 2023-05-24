@@ -20,7 +20,7 @@ function MainPage() {
       const fetchAds = async () => {
         await axiosInstance.get('ads_depth/')
         .then(response => {
-          dispatch(setAds(response.data));
+          dispatch(setAds(response.data.filter(elem => elem.status === 'A')));
         });
       }
   
@@ -46,6 +46,7 @@ function MainPage() {
         {ads.map(ad => (
           <LargeAd key={ad.id} {...ad}/>
         ))}
+        
         
       </div>            
     </div>

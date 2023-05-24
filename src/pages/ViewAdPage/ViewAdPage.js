@@ -11,7 +11,8 @@ function ViewAdPage(props) {
     const dispatch = useDispatch();
     const { item } = useSelector(store => store.item);
     const itemId = useParams().id;
-
+    const user = useSelector(store => store.user.user);
+    
     useEffect(() => {
         const fetchItem = async () => {
             await axiosInstance.get(`ads_depth/${itemId}/`)
@@ -21,8 +22,10 @@ function ViewAdPage(props) {
           }
           fetchItem();
     }, [dispatch]);
-
-
+    const time = new Date(item.publication_date);
+    const month = time.getUTCMonth() + 1; //months from 1-12
+    const day = time.getUTCDate();
+    const year = time.getUTCFullYear();
 
   return (
     <div className = "viewAdPage">
@@ -30,7 +33,9 @@ function ViewAdPage(props) {
             <div className = "leftTopBar">
                 <span className = "nameAd"><strong>{item?.title}</strong></span>
                 <div className = "photos">
-                    <div className = "mainPhoto">главное фото</div>
+                    <div className = "mainPhoto">
+                        {/* <img className ="mImg" src = {require('./priora.jpg')}/> */}
+                    </div>
                     <div className = "restPhotos">
                     </div>
                 </div>
@@ -45,11 +50,11 @@ function ViewAdPage(props) {
                 <span className = "nameAd">{item?.price}, руб.</span>
                 <div className = "sellerBar">
                     <span className = "sellerName">{item.user_id?.first_name}</span>
-                    <Link className = "my-link"><BtnBlue50Rect name = "Написать продавцу"/></Link>
+                    {!!(user.username!=item.user_id?.username) && <Link className = "my-link"><BtnBlue50Rect name = "Написать продавцу"/></Link>}
                 </div>
                 <div className = "date-n-place">
-                    <span className = "rr">{item.user_id?.city}</span>
-                    <span className = "rr">{props.dateTime}</span>
+                    <span className = "rr">Город {item.user_id?.city}</span>
+                    <span className = "rr">Выложено {day +'.'+ month + "." + year}</span>
                 </div>
             </div>
        </div>

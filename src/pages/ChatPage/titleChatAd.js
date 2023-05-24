@@ -1,8 +1,10 @@
 import './titleChatAd.css';
 import BtnRedRect from '../../components/buttons/BtnRedRect';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function TitleChatAd(props) {
+  const chatInfo = useSelector(store => store.chatInfo.chatInfo);
   return (
     <div class = "chatAd">
        
@@ -12,7 +14,7 @@ function TitleChatAd(props) {
         </div>             
        
        <div className = "infoBar">
-            <span className = "personName">Имя</span>
+            <span className = "personName">{chatInfo.user_2?.first_name}</span>
             
        </div>
        <div className = "rightBar">

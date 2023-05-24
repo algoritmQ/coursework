@@ -3,49 +3,85 @@ import '../.././index.css';
 import TitleChatAd from './titleChatAd';
 import BtnSendMsg from '../../components/buttons/BtnSendMsg';
 
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axiosInstance from '../../api/api';
+import { setChatInfo } from '../../store/reducers/chatReducer';
 
 function ChatPage(props) {
-  document.addEventListener('submit', e => {
-    e.preventDefault();
-    sendMessage(e);
-  })
+  const chatId = useParams().id;
+  const dispatch = useDispatch();
+  const chatInfo = useSelector(store => store.chatInfo.chatInfo);
+  console.log(chatInfo);
   
-  function sendMessage(e) {
-    // e.preventDefault();
+  useEffect(() => {
+    async function getChatInfo() {
+      await axiosInstance.get(`chats_depth/${chatId}/`)
+      .then(response => {
+        dispatch(setChatInfo(response.data));
+      })
+      .catch(error => console.error(error));
+    }
     
-    const chatField = document.querySelector('#chatField');
-    const myInput = document.querySelector('#myInput');
+    async function getMessages() {
+      await axiosInstance.get(`messages/?chat_id=${chatId}`)
+      .then(response => {
+        response.data.map(value => {
+          printMessage(chatInfo.user_1?.id === value.user_id ? 'message' : 'getMessage', value.message_text);
+        });
+        })
+        .catch(error => console.error(error));
+      }
 
-    if (myInput.value) {  
+      getChatInfo();
+      getMessages();
+      
+    }, [dispatch])
+    
+    // document.addEventListener('submit', e => {
+    //   e.preventDefault();
+    //   sendMessage();
+    // })
+  
+    function printMessage(clas, value) {
+      document.querySelector('#chatField').prepend(createMessage(clas, value));
+    }
+    
+    async function sendMessage() {
+      const chatField = document.querySelector('#chatField');
+      const myInput = document.querySelector('#myInput');
+      if (myInput.value) {  
+        const msg = createMessage('message', myInput.value);
+        chatField.prepend(msg);
+      }
+      
+      await axiosInstance.post('messages/', {
+        "chat_id": chatId,
+        "message_text": myInput.value,
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => console.error(error));
+      myInput.value = '';
+    }
+
+  function createMessage(clas, value) {
       const msg = document.createElement('div');
-      msg.classList.add("message");
-      msg.innerHTML = myInput.value;
-
+      msg.classList.add(clas);
+      msg.innerHTML = value;
       const div = document.createElement('div');
       const currentDate = new Date();
       div.innerHTML = currentDate.getHours() + ":" + currentDate.getMinutes();
-
       msg.append(div);
-
-      myInput.value = '';
-
-      chatField.prepend(msg);
-    }
+      return msg;
   }
 
   return (
     <div class = "chatPage">
         <TitleChatAd/>
         <div className = "chatField" id = "chatField">
-          <div  className = "getMessage">
-            ПЕРВОЕ СООБЩЕНИЕ
-            <div>14:05</div>
-          </div>
-          <div  className = "getMessage">ПЕРВОЕ СООБЩЕНИЕ</div>
-          <div className = "message">ВТорое сообщение<div>14:05</div></div>
-          <div  className = "getMessage">ПЕРВОЕ СООБЩЕНИЕ</div>
-          
         </div>
         <div className = "sendField">
             <div className = "myInput">

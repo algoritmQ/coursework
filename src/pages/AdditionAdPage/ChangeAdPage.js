@@ -104,7 +104,8 @@ function ChangeAdPage(props) {
                   <input
                     id = "addImage"
                     type ="file"
-                    name = "addImage"  
+                    name = "addImage"
+                    onChange={e => console.log(e.target.files[0])}  
                   />
                   
                 </div>

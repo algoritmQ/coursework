@@ -18,7 +18,7 @@ function ChatAd(props) {
     <div class = "chatAd">
        <div className = "avatarBar"></div>
        <div className = "infoBar2">
-            <span className = "personName">Имя</span>
+            <span className = "personName">Дмитрий</span>
             <div className = "lastMsg">
             Кто: <span style = {{color:'rgba(0,0,0,0.7)'}}></span>
             </div>
@@ -26,9 +26,10 @@ function ChatAd(props) {
        <div className = "rightBar">
             <span className = "dateTime">Вчера</span>
             <span className = "dateTime">18:01</span>
-            {!!(status=="buyer") ? (<span className = "sellOrBuy">Вы покупатель</span>) 
+            
+            {/* {!!(status=="buyer") ? (<span className = "sellOrBuy">Вы покупатель</span>) 
             : (<span className = "sellOrBuy">Вы продавец</span>)
-          }
+          } */}
        </div>
     </div>
     

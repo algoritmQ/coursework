@@ -46,6 +46,10 @@
     justify-content: center;
     align-items: center;
 }
+.leftTopBar .photos .mainPhoto img{
+    width:600px;
+    height:350px;
+}
 
 .leftTopBar .photos .restPhotos{
     /* border:0.3px solid silver; */

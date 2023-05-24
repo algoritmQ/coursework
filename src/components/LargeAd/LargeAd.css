@@ -1,11 +1,12 @@
 .largeAd{
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    /* border: 1px solid rgba(0, 0, 0, 0.1); */
     display: flex;
     width: 1150px;
     height: 340px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    background-color:rgba(210, 210, 210, 0.095);
 }
 
 .avatarBar{
@@ -16,13 +17,17 @@
 }
 
 .avatarPhoto{
-    border:1px solid rgba(192, 192, 192, 0.697);
+    /* border:1px solid rgba(192, 192, 192, 0.697); */
     display:flex;
     width:404px;
     height:251px;
     justify-content: center;
     border-radius:5px;
     align-items: center;
+}
+.avatarPhoto img{
+    width:404px;
+    height:251px;
 }
 
 .avatarBar .bottomBar{
