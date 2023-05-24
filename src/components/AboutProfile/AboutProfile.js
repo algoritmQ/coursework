@@ -18,14 +18,14 @@ function AboutProfile(...props) {
                     <span className = "title">Информация о пользователе</span>
                     <div className = "allInfo">
                         <div className = "bar">
-                            <span className = "infoInBar">{user.first_name}</span>
-                            <span className = "infoInBar">{user.last_name}</span>    
-                            <span className = "infoInBar"></span>
+                            <span className = "infoInBar">Имя</span>
+                            <span className = "infoInBar">Фамилия</span>    
+                            <span className = "infoInBar">Город</span>
                         </div>
                         <div className = "bar">
-                            <span className = "infoInBar2">{props.firstName}</span>
-                            <span className = "infoInBar2">{props.lastName}</span>
-                            
+                            <span className = "infoInBar2">{user.first_name}</span>
+                            <span className = "infoInBar2">{user.last_name}</span>
+                            <span className = "infoInBar2">{user.city}</span>
                         </div>
                     </div>
                 </div>

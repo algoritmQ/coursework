@@ -58,10 +58,9 @@ export const App = () => {
          <Route path = '/EnterForm' element = {<EnterForm/>} />
          <Route path = '/ViewAdPage/:id' element = {<ViewAdPage/>} />
          <Route path = '/DialogsPage' element = {<DialogsPage/>} />
-         <Route path = '/DialogsPage/ChatPage' element = {<ChatPage/>} />
+         <Route path = '/ChatPage' element = {<ChatPage/>} />
          <Route path = '/AdditionAdPage' element = {<AdditionAdPage/>} />
-
-         <Route path = '/ChangeAdPage' element = {<ChangeAdPage/>} />
+         <Route path = '/ChangeAdPage/:id' element = {<ChangeAdPage/>} />
          <Route path = '/UserInfoPage' element = {<UserInfoPage/>} />
          
         </Routes>

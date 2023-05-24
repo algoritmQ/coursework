@@ -39,7 +39,7 @@ function AdditionAdPage(props) {
   async function createItem() {
     console.log(arrCategories);
 
-    const categoryId = arrCategories.findIndex(element => element.label === category);
+    const categoryId = arrCategories.findIndex(element => element.label === category) + 1;
 
     console.log(categoryId);
     await axiosInstance.post('ads/', {

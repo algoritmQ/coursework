@@ -3,14 +3,18 @@ import './LilAd.css';
 import { Link } from 'react-router-dom';
 
 function LilAd(props) {
+    const time = new Date(props.publication_date);
+    const month = time.getUTCMonth() + 1;
+    const day = time.getUTCDate();
+    const year = time.getUTCFullYear();
     return (
       <div class = "lilAd">
         <div className = "avatarField" >ава</div>
-        <span className = "nameAd" style = {{fontSize:'16px'}}>Название</span>
-        <span className = "priceAd" style = {{fontSize:'14px'}}>Цена, руб.</span>
-        <span className = "addressAd" style = {{fontSize:'12px', color:'rgba(0,0,0,0.5)'}}>Город</span>
-        <span className = "timeAd" style = {{fontSize:'12px', color:'rgba(0,0,0,0.5)'}}>Время</span>
-        <Link><BtnBlcknWRect name ="Редактировать"/></Link>
+        <span className = "nameAd" style = {{fontSize:'16px'}}>{props.title}</span>
+        <span className = "priceAd" style = {{fontSize:'14px'}}>{props.price}, руб.</span>
+        <span className = "addressAd" style = {{fontSize:'12px', color:'rgba(0,0,0,0.5)'}}>{props.city}</span>
+        <span className = "timeAd" style = {{fontSize:'12px', color:'rgba(0,0,0,0.5)'}}>{day +'.'+ month + "." + year}</span>
+        <Link to = {`/ChangeAdPage/${props.id}`}><BtnBlcknWRect name ="Редактировать"/></Link>
       </div>
     );
   }

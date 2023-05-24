@@ -14,11 +14,11 @@ import axiosInstance from '../../api/api.js';
 
 function MainPage() {
   const dispatch = useDispatch();
-  const { ads } = useSelector(store => store.ads);
+  const ads = useSelector(store => store.ads.ads);
 
   useEffect(() => {
       const fetchAds = async () => {
-        await axiosInstance.get('ads/')
+        await axiosInstance.get('ads_depth/')
         .then(response => {
           dispatch(setAds(response.data));
         });
@@ -45,8 +45,7 @@ function MainPage() {
 
         {ads.map(ad => (
           <LargeAd key={ad.id} {...ad}/>
-        ))
-        }
+        ))}
         
       </div>            
     </div>
