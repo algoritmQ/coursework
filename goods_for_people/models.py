@@ -42,6 +42,7 @@ class Message(models.Model):
     chat_id = models.ForeignKey(Chat, models.CASCADE)
     user_id = models.ForeignKey(Profile, models.SET_NULL, blank=True, null=True)
     message_text = models.CharField(max_length=255)
+    message_time = models.DateTimeField(auto_now_add=True)
 
 
 class Notification(models.Model):

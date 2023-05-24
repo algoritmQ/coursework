@@ -59,7 +59,7 @@ class UserViewSet(viewsets.ModelViewSet):
             new_user = serializer.save()
             new_user.set_password(new_user.password)
             new_user.save()
-            return Response(status=status.HTTP_201_CREATED)
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors)
 
@@ -74,7 +74,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 return Response(data=updated_user.data, status=status.HTTP_200_OK)
             return Response(serializer.errors)
 
-    def destroy(self, request, *args, **kwargs):
+    def delete(self, request, *args, **kwargs):
         queryset = Profile.objects.all()
         if request.data.get('id'):
             user = queryset.filter(id=request.data.get('id'))
@@ -198,6 +198,7 @@ class AdViewSet(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
         data = request.data
+        queryset = Ad.objects.all()
         if request.user.id != instance.user_id.id:
             return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
         decoded_payload = jwt_decode_handler(request.headers.get("Authorization")[7:])
@@ -205,7 +206,7 @@ class AdViewSet(viewsets.ModelViewSet):
         updated_ad = AdSerializer(data=data)
         if instance.id:
             if updated_ad.is_valid():
-                updated_ad.save()
+                queryset.filter(id=instance.id).update(**updated_ad.data)
                 return Response(data=updated_ad.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -278,8 +279,13 @@ class ChatViewSet(viewsets.ModelViewSet):
         if data['user_1'] == data['user_2']:
             return Response(status=status.HTTP_400_BAD_REQUEST, data='Same users id')
 
-        if Chat.objects.filter(user_1=data['user_1']).filter(user_2=data['user_2']).count() != 0:
-            return Response(status=status.HTTP_400_BAD_REQUEST, data='Chat already exists')
+        chat1_exists = Chat.objects.filter(user_1=data['user_1']).filter(user_2=data['user_2'])
+        if chat1_exists.count() != 0:
+            return Response(status=status.HTTP_200_OK, data=chat1_exists[0].id)
+
+        chat2_exists = Chat.objects.filter(user_2=data['user_1']).filter(user_1=data['user_2'])
+        if chat2_exists.count() != 0:
+            return Response(status=status.HTTP_200_OK, data=chat2_exists[0].id)
 
         new_chat = ChatSerializer(data=data)
         if new_chat.is_valid():
@@ -298,6 +304,8 @@ class ChatViewSet(viewsets.ModelViewSet):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticatedOrReadOnly])
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
@@ -330,6 +338,15 @@ class MessageViewSet(viewsets.ModelViewSet):
         return Response(new_message.errors)
 
 
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticatedOrReadOnly])
 class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
+
+    # def get_queryset(self):
+    #     queryset = Notification.objects.all()
+    #     if self.request.method == 'GET':
+    #         params = self.request.query_params.dict()
+    #         try:
+    #             queryset = queryset.filter()
