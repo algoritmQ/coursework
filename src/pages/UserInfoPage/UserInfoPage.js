@@ -5,9 +5,14 @@ import LilAd from '../../components/LilAd/LilAd';
 import { Link } from 'react-router-dom';
 
 import React, {useEffect, useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import axiosInstance from '../../api/api';
 
 function UserInfoPage(props) {
     const [status, setStatus] = useState('status-active');
+    const user = useSelector(store => store.user.user);
+    const dispatch = useDispatch();
+
     const handleStatus = () => {
         status === 'status-active' ? setStatus('status-outpubl') : setStatus('status-active');
     }
@@ -17,6 +22,17 @@ function UserInfoPage(props) {
     const handleNoActive = () =>{
         setStatus('status-outpubl')
     }
+
+    useEffect(() => {
+        async function getMyAds() {
+            await axiosInstance.get(`ads/?user_id=${user.id}`)
+            .then(response => console.log(response.data))
+            .catch(error => console.error(error));
+        }
+
+        getMyAds();
+
+    }, [dispatch]);
 
   return (
     <div className = "userInfoPage">

@@ -20,8 +20,6 @@ function AdditionAdPage(props) {
     const [shortDescription, setShortDescription] = useState('');
     const [fullDescription, setFullDescription] = useState('');
     const [category, setCategory] = useState('');
-    const [categoryId, setCategoryId] = useState(0);
-
 
     useEffect(() => {
       const fetchCategories = async () => {
@@ -39,13 +37,17 @@ function AdditionAdPage(props) {
   }
   categories.forEach(element => appendCat(element.id, element.title)); 
   async function createItem() {
+    console.log(arrCategories);
+
+    const categoryId = arrCategories.findIndex(element => element.label === category);
+
+    console.log(categoryId);
     await axiosInstance.post('ads/', {
       'title': name,
-      'category': 1,
+      'category': categoryId,
       'price': price,
       'short_description': shortDescription,
       'full_description': fullDescription,
-      'user_id': 1,
     })
     .then(response => console.log(response))
     .catch(error => console.error);
