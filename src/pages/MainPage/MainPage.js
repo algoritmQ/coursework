@@ -12,13 +12,14 @@ import EnterForm from '../../components/EnterForm/EnterForm';
 import axiosInstance from '../../api/api.js';
 
 
-function MainPage() {
+function MainPage(props) {
   const dispatch = useDispatch();
   const ads = useSelector(store => store.ads.ads);
 
   useEffect(() => {
       const fetchAds = async () => {
-        await axiosInstance.get('ads_depth/')
+        const query = props.input ? props.input : '';
+        await axiosInstance.get(`ads_depth/?title=${query}`)
         .then(response => {
           dispatch(setAds(response.data.filter(elem => elem.status === 'A')));
         });

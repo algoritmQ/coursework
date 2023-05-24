@@ -13,7 +13,7 @@ function ChatPage(props) {
   const chatId = useParams().id;
   const dispatch = useDispatch();
   const chatInfo = useSelector(store => store.chatInfo.chatInfo);
-  console.log(chatInfo);
+  const user = useSelector(store => store.user.user);
   
   useEffect(() => {
     async function getChatInfo() {
@@ -28,7 +28,7 @@ function ChatPage(props) {
       await axiosInstance.get(`messages/?chat_id=${chatId}`)
       .then(response => {
         response.data.map(value => {
-          printMessage(chatInfo.user_1?.id === value.user_id ? 'message' : 'getMessage', value.message_text);
+          printMessage(user?.id === value?.user_id ? 'message' : 'getMessage', value.message_text);
         });
         })
         .catch(error => console.error(error));

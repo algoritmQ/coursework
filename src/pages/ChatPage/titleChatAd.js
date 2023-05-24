@@ -5,16 +5,17 @@ import { useSelector } from 'react-redux';
 
 function TitleChatAd(props) {
   const chatInfo = useSelector(store => store.chatInfo.chatInfo);
+  const user = useSelector(store => store.user.user);
   return (
     <div class = "chatAd">
        
         <div className = "strelka">
           <Link to = "/DialogsPage"><img src = {require('./left-arrow.png')}/></Link>
         
-        </div>             
-       
+        </div>            
+
        <div className = "infoBar">
-            <span className = "personName">{chatInfo.user_2?.first_name}</span>
+            <span className = "personName">{chatInfo?.user_1.username === user.username ? chatInfo?.user_2.first_name : chatInfo?.user_1.first_name }</span>
             
        </div>
        <div className = "rightBar">

@@ -11,7 +11,7 @@ function LilAd(props) {
     const year = time.getUTCFullYear();
     return (
       <div class = "lilAd">
-        <Link to = {`/ViewAdPage/${props.id}`}><div className = "avatarField"> <img className ="mImg" src = {require('./priora.jpg')}/> </div></Link>
+        <Link to = {`/ViewAdPage/${props.id}`}><div className = "avatarField"> {/*<img className ="mImg" src = {require('./priora.jpg')}/>*/} </div></Link>
         <span className = "nameAd" style = {{fontSize:'16px'}}>{props.title}</span>
         <span className = "priceAd" style = {{fontSize:'14px'}}>{props.price}, руб.</span>
         <span className = "addressAd" style = {{fontSize:'12px', color:'rgba(0,0,0,0.5)'}}>{props.city}</span>
