@@ -32,10 +32,6 @@ function MainPage(props) {
             props.setmaxPrice('');
             props.setCity('');
         });
-        // document.querySelector('.js-mainSearch').value = "";
-        // document.querySelector('.minPriceInput').value = "";
-        // document.querySelector('.maxPriceInput').value = "";
-        // document.querySelector('.cityInput').value = "";
       }
       fetchAds();
       

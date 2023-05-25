@@ -4,18 +4,69 @@ import TitleChatAd from './titleChatAd';
 import BtnSendMsg from '../../components/buttons/BtnSendMsg';
 
 import { Link, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState  } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axiosInstance from '../../api/api';
 import { setChatInfo } from '../../store/reducers/chatReducer';
 
 function ChatPage(props) {
+  const socket = useRef(null);
+  const [messages, setMessages] = useState([]);
+  const [connected, setConnected] = useState(false);
+  const [notification, setNotification] = useState('');
   const chatId = useParams().id;
   const dispatch = useDispatch();
   const chatInfo = useSelector(store => store.chatInfo.chatInfo);
   const user = useSelector(store => store.user.user);
+
+
+  function connect() {
+    socket.current = new WebSocket('ws://localhost:5001');
+
+    socket.current.onopen = () => {
+      console.log('Соединение установлено');
+    };
+    socket.current.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      if (message.event === 'ping') {
+        // Отправить понг в ответ на пинг
+        const pongMessage = {
+          event: 'pong',
+        };
+        socket.current.send(JSON.stringify(pongMessage));
+      }
+      else if (message.event === 'note') {
+        console.log(message.notification);
+        setNotification(message.notification);
+        setTimeout(() => {
+          setNotification('');
+        }, 5000);
+
+      }
+      else { 
+        console.log(message);
+        if(user?.id !== message?.id){
+           printMessage('getMessage', message?.msg);
+        }
+      }
+    };
+    socket.current.onclose = () => {
+      console.log('Socket закрыт');
+    };
+  
+      socket.current.onerror = () => {
+        console.log('Socket произошла ошибка');
+      };
+  
+      return () => {
+        if (socket.current) {
+          socket.current.close();
+        }
+      };
+  }
   
   useEffect(() => {
+    connect();
     async function getChatInfo() {
       await axiosInstance.get(`chats_depth/${chatId}/`)
       .then(response => {
@@ -23,6 +74,7 @@ function ChatPage(props) {
       })
       .catch(error => console.error(error));
     }
+    
     
     async function getMessages() {
       await axiosInstance.get(`messages/?chat_id=${chatId}`)
@@ -36,7 +88,7 @@ function ChatPage(props) {
 
       getChatInfo();
       getMessages();
-      
+
     }, [dispatch])
     
     // document.addEventListener('submit', e => {
@@ -82,6 +134,7 @@ function ChatPage(props) {
     <div class = "chatPage">
         <TitleChatAd/>
         <div className = "chatField" id = "chatField">
+
         </div>
         <div className = "sendField">
             <div className = "myInput">
