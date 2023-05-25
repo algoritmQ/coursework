@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import axiosInstance from '../../api/api.js';
 import { setCategories } from '../../store/reducers/categoriesReducer';
 
@@ -20,6 +21,24 @@ function AdditionAdPage(props) {
     const [shortDescription, setShortDescription] = useState('');
     const [fullDescription, setFullDescription] = useState('');
     const [category, setCategory] = useState('');
+    const [selectedImage, setSelectedImage] = useState(null);
+    const navigate = useNavigate();
+    //загрузка фото
+    const [image, setImage] = useState();
+    const [imageURL, setImageURL] = useState();
+    const fileReader = new FileReader();
+
+    fileReader.onloadend = () => {
+      setImageURL(fileReader.result);
+    };
+    const handleOnChange = (event) => {
+      event.preventDefault();
+      if (event.target.files && event.target.files.length) {
+        const file = event.target.files[0];
+        setImage(file);
+        fileReader.readAsDataURL(file);
+      }
+    };
 
     useEffect(() => {
       const fetchCategories = async () => {
@@ -41,16 +60,18 @@ function AdditionAdPage(props) {
 
     const categoryId = arrCategories.findIndex(element => element.label === category) + 1;
 
-    console.log(categoryId);
-    await axiosInstance.post('ads/', {
-      'title': name,
-      'category': categoryId,
-      'price': price,
-      'short_description': shortDescription,
-      'full_description': fullDescription,
-    })
-    .then(response => console.log(response))
-    .catch(error => console.error);
+    const formData = new FormData();
+    formData.append('title', name);
+    formData.append('category', categoryId);
+    formData.append('price', price);
+    formData.append('short_description', shortDescription);
+    formData.append('full_description', fullDescription);
+    formData.append('photo', selectedImage);
+
+    await axiosInstance.post('ads/', formData)
+      .then(response => console.log(response))
+      .catch(error => console.error(error));
+      navigate("/UserInfoPage");
   }
 
     return (
@@ -81,13 +102,17 @@ function AdditionAdPage(props) {
               <div className = "oneField2"><input placeholder = "price" value={price} onChange={e => setPrice(e.target.value)}/></div>
               <div className = "bigField2">
                 <div className = "knopka">
-                  <label for = "addImage">
+                  <label for = "file-loader-button" htmlFor="file-loader-button">
                     <BtnGreyRect/>
                   </label>
                   <input
-                    id = "addImage"
+                    id="file-loader-button"
+                    
                     type ="file"
                     name = "addImage"  
+                    onChange={e => {
+                      setSelectedImage(e.target.files[0]);
+                    }}
                   />
                   
                 </div>

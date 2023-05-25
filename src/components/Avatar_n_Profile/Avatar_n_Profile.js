@@ -11,7 +11,7 @@ function Avatar_n_Profile({autorized, setAutorized}) {
   return (
     <div class = "avatar_n_Profile">
       <div className = "avatar">
-        Ава
+        
       </div>
       <div className = "links">
          <span id = "l1">{user.last_name}</span> <span id = "l1">{user.first_name}</span>

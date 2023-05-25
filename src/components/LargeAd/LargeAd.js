@@ -39,7 +39,7 @@ function LargeAd(props) {
     <div class = "largeAd">
       <div className = "avatarBar">
         <div className = "avatarPhoto">
-          {/* <img className ="mImg" src = {require('./priora.jpg')}/> */}
+          <img className ="mImg" src = {props?.photo}/>
         </div>
         <div className = "bottomBar">
             <span>город {props.user_id.city}</span>
@@ -62,7 +62,7 @@ function LargeAd(props) {
               </div>                 
           </div>
           <div className = "sellerBar">
-            <span className = "sellerName"><Link to = {`/AnotherUserInfoPage/${props.id}`} className="my-link" >{props.user_id.first_name}!</Link></span>
+            <span className = "sellerName"><span>{props.user_id.first_name}!</span></span>
             {!!(props.user_id.username != user.username) && <div onClick={goToRoom}><Link><BtnBlcknWRect name = "Написать продавцу"/></Link></div>}
           </div>          
         </div>

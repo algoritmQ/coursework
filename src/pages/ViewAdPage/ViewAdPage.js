@@ -1,7 +1,7 @@
 import './ViewAdPage.css';
 import '../.././index.css';
 import BtnBlue50Rect from '../../components/buttons/BtnBlue50Rect'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../api/api.js';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +12,9 @@ function ViewAdPage(props) {
     const { item } = useSelector(store => store.item);
     const itemId = useParams().id;
     const user = useSelector(store => store.user.user);
-    
+    const navigate = useNavigate();
+
+
     useEffect(() => {
         const fetchItem = async () => {
             await axiosInstance.get(`ads_depth/${itemId}/`)
@@ -28,6 +30,16 @@ function ViewAdPage(props) {
     const year = time.getUTCFullYear();
     const hours = time.getHours();
     const minutes = time.getMinutes();
+    async function goToRoom() {
+        await axiosInstance.post('chats/', {
+          'user_1': user.id,
+          'user_2': item.user_id.id,
+        })
+          .then(response => {
+            navigate(`/ChatPage/${response.data}`);
+          })
+          .catch(error => console.error(error));
+      }
 
   return (
     <div className = "viewAdPage">
@@ -36,7 +48,7 @@ function ViewAdPage(props) {
                 <span className = "nameAd"><strong>{item?.title}</strong></span>
                 <div className = "photos">
                     <div className = "mainPhoto">
-                        {/* <img className ="mImg" src = {require('./priora.jpg')}/> */}
+                        <img className ="mImg" src = {item?.photo}/>
                     </div>
                     <div className = "restPhotos">
                     </div>
@@ -52,7 +64,7 @@ function ViewAdPage(props) {
                 <span className = "nameAd">{item?.price}, руб.</span>
                 <div className = "vap-sellerBar">
                     <span className = "sellerName">{item.user_id?.first_name}</span>
-                    {!!(user.username!=item.user_id?.username) && <Link className = "my-link"><BtnBlue50Rect name = "Написать продавцу"/></Link>}
+                    {!!(user.username!=item.user_id?.username) && <div onClick={goToRoom}><BtnBlue50Rect name = "Написать продавцу"/></div>}
                 </div>
                 <div className = "date-n-place">
                     <span className = "rr">Город {item.user_id?.city}</span>

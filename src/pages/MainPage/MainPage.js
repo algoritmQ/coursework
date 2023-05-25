@@ -37,25 +37,6 @@ function MainPage(props) {
       
   }, [dispatch, props.click]);
 
-  {/*
-      .filter(function(elem){
-        elem.status === 'A';
-        elem.city === props.city
-      })
-
-  */}
-
-  // setTimeout(() => {
-  //   const input = document.querySelector('.js-mainSearch');
-  //   const btn = document.querySelector('.js-submitDiv');
-  
-  //   btn.addEventListener('click', (e) => {
-  //     // e.stopPropagation();
-  //     //e.preventDefault();
-  //     console.log('click!!!!!!!!!!!!!!!!!!!!');
-  //   })
-  // }, 200)
-
   const[user, setUser] = useState(false);
   return (
     <div class = "bodyWrapper"> 
@@ -64,8 +45,7 @@ function MainPage(props) {
         {ads.map(ad => (
           <LargeAd key={ad.id} {...ad}/>
         ))}
-        
-        
+              
       </div>            
     </div>
   );

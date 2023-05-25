@@ -26,6 +26,7 @@ function ChangeAdPage(props) {
     const [shortDescription, setShortDescription] = useState('');
     const [fullDescription, setFullDescription] = useState('');
     const [category, setCategory] = useState('');
+    const [image, setImage] = useState(null);
     
     
     function appendCat(v, l){ 
@@ -37,14 +38,24 @@ function ChangeAdPage(props) {
     async function updateItem() {
       const categoryId = arrCategories.findIndex(element => element.label === category) + 1;
 
-      await axiosInstance.put(`ads/${adsId}/`, {
-      'title': name,
-      'category': categoryId,
+      const formData = new FormData();
+      formData.append('title', name);
+      formData.append('category', categoryId);
+      formData.append('price', price);
+      formData.append('short_description', shortDescription);
+      formData.append('full_description', fullDescription);
+      //formData.append('photo', image);
 
-      'price': price,
-      'short_description': shortDescription,
-      'full_description': fullDescription,
-    })
+
+    //   await axiosInstance.put(`ads/${adsId}/`, {
+    //   'title': name,
+    //   'category': categoryId,
+      
+    //   'price': price,
+    //   'short_description': shortDescription,
+    //   'full_description': fullDescription,
+    // })
+    await axiosInstance.put(`ads/${adsId}/`, formData)
     .then(response => console.log(response))
     .then(navigate("/UserInfoPage"))
     .catch(error => console.error);
@@ -72,7 +83,7 @@ function ChangeAdPage(props) {
           setShortDescription(response.data.short_description);
           setFullDescription(response.data.full_description);
           setCategory(response.data.category);
-          
+          setImage(response.data.photo)
         })
         .catch(error => console.error(error));
     }
@@ -97,21 +108,14 @@ function ChangeAdPage(props) {
               <div className = "oneField2">
                 <Select id = "my-select"
                   className="input-cont"
-                  placeholder= {arrCategories[category - 1].label}
+                  placeholder= {arrCategories[category - 1]?.label}
                   options={arrCategories}
-                  value={category}
+                  //value={category}
                   label = {category}
-                  selected = {category}
+                  //selected = {category}
                   onChange={e => setCategory(e.label)}   
                 />
-                
-                {/* <select onChange={e => setCategory(e.label)>
-                  {
-                    arrCategories.map(item => (
-                      <option key = {item.value} selected = {item.value == category}>{item.label}</option>
-                    ))
-                  }
-                </select> */}
+
               </div>
               <div className = "oneField2">
                 <input placeholder = "name" value={name} onChange={e => setName(e.target.value)}/>
@@ -126,12 +130,21 @@ function ChangeAdPage(props) {
                     id = "addImage"
                     type ="file"
                     name = "addImage"
-                    onChange={e => console.log(e.target.files[0])}  
+                    onChange={e => {
+                      const file = e.target.files[0];
+                      const reader = new FileReader();
+                      reader.onload = () => {
+                        setImage(reader.result);
+                      }
+                      if (file) {
+                        reader.readAsDataURL(file);
+                      } 
+                    }}  
                   />
-                  
+
                 </div>
                 <div className = "fieldPhotos">
-                  <div className = "onePhoto"></div>
+                  <div className = "onePhoto"><img src = {image}/></div>
                 </div>
 
               </div>
