@@ -47,7 +47,7 @@ function EnterForm(props) {
   return (
     <>
       <form>
-        <div class = "enterForm">
+        <div class = "enterForm" onClick={e => e.stopPropagation()}>
             <span class = "title">Вход</span>
               <input className = "font-roboto" placeholder='Логин' value={login} onChange={e => setLogin(e.target.value)}/>
               <input className = "font-roboto" placeholder='Пароль' type="password" value={password} onChange={e => setPassword(e.target.value)}/>

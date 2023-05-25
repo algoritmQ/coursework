@@ -1,9 +1,12 @@
+
 import HamburgerButton from '../buttons/HamburgerButton';
 import BtnBlueMainSearch from '../buttons/BtnBlueMainSearch';
 import './Header2.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Header2(props) {
+  const navigate = useNavigate();
+
     return (
       <div class = "Header2">
         <div className="left">
@@ -18,9 +21,16 @@ function Header2(props) {
        
         <div className="middle">
           <div className="search-field">
-            <input className="font-roboto js-mainSearch" placeholder='Поиск объявлений'/><HamburgerButton/>
+            <input value={props.input} onChange={e => props.setInput(e.target.value)} className="font-roboto js-mainSearch" placeholder='Поиск объявлений'/>
+            <HamburgerButton
+              select = {props.select} setSelect = {props.setSelect} minPrice = {props.minPrice} setminPrice = {props.setminPrice}
+              setmaxPrice = {props.setmaxPrice} maxPrice = {props.maxPrice} city = {props.city} setCity = {props.setCity}
+            />
           </div>
-          <Link to ="/MainPage" className = "my-link"><div className='js-submitDiv'><BtnBlueMainSearch className = "font-roboto" name ="Начать поиск"/></div></Link>
+          <div onClick = {() => {
+                              props.setClick(!props.click);
+                              navigate('/MainPage');
+                              }} className='js-submitDiv' style = {{cursor:'pointer'}}><BtnBlueMainSearch className = "font-roboto" name ="Начать поиск"/></div>
         </div>
       </div>
     );

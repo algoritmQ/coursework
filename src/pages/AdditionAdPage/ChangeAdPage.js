@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../api/api.js';
 import { setCategories } from '../../store/reducers/categoriesReducer';
 
@@ -8,6 +9,7 @@ import '../.././index.css';
 import BtnBlue50Rect from '../../components/buttons/BtnBlue50Rect'
 import { Link, useParams } from 'react-router-dom';
 import BtnGreyRect from '../../components/buttons/BtnGreyRect';
+import BtnRedRect from '../../components/buttons/BtnRedRect';
 import Select from 'react-select';
 import { setItem } from '../../store/reducers/itemReducer.js';
 
@@ -16,7 +18,7 @@ function ChangeAdPage(props) {
   const dispatch = useDispatch();
     const adsId = useParams().id;
     const { item } = useSelector(store => store.item);
-
+    const navigate = useNavigate();
     let arrCategories = []; 
     const { categories } = useSelector(store => store.categories);
     const [name, setName] = useState('');
@@ -24,7 +26,7 @@ function ChangeAdPage(props) {
     const [shortDescription, setShortDescription] = useState('');
     const [fullDescription, setFullDescription] = useState('');
     const [category, setCategory] = useState('');
-
+    
     
     function appendCat(v, l){ 
       const cat = {value: v, label: l};
@@ -34,14 +36,23 @@ function ChangeAdPage(props) {
     
     async function updateItem() {
       const categoryId = arrCategories.findIndex(element => element.label === category) + 1;
+
       await axiosInstance.put(`ads/${adsId}/`, {
       'title': name,
       'category': categoryId,
+
       'price': price,
       'short_description': shortDescription,
       'full_description': fullDescription,
     })
     .then(response => console.log(response))
+    .then(navigate("/UserInfoPage"))
+    .catch(error => console.error);
+  }
+    async function deleteItem() {
+      await axiosInstance.delete(`ads/${adsId}/`, {    })
+    .then(response => console.log(response))
+    .then(navigate("/UserInfoPage"))
     .catch(error => console.error);
   }
   useEffect(() => {
@@ -60,7 +71,8 @@ function ChangeAdPage(props) {
           setPrice(response.data.price);
           setShortDescription(response.data.short_description);
           setFullDescription(response.data.full_description);
-          // setCategory();
+          setCategory(response.data.category);
+          
         })
         .catch(error => console.error(error));
     }
@@ -85,12 +97,21 @@ function ChangeAdPage(props) {
               <div className = "oneField2">
                 <Select id = "my-select"
                   className="input-cont"
-                  placeholder= "Категория"
+                  placeholder= {arrCategories[category - 1].label}
                   options={arrCategories}
-                  // value={category}
-                  label={category}
+                  value={category}
+                  label = {category}
+                  selected = {category}
                   onChange={e => setCategory(e.label)}   
                 />
+                
+                {/* <select onChange={e => setCategory(e.label)>
+                  {
+                    arrCategories.map(item => (
+                      <option key = {item.value} selected = {item.value == category}>{item.label}</option>
+                    ))
+                  }
+                </select> */}
               </div>
               <div className = "oneField2">
                 <input placeholder = "name" value={name} onChange={e => setName(e.target.value)}/>
@@ -124,7 +145,8 @@ function ChangeAdPage(props) {
             <div className = "largeDescription">
               <span>Подробное описание</span>
               <textarea value={fullDescription} onChange={e => setFullDescription(e.target.value)}></textarea>     
-              <div onClick={updateItem}><BtnBlue50Rect name = "Обновить объявление" widd = "210px"/></div>      
+              <div onClick={updateItem}><BtnBlue50Rect name = "Обновить объявление" widd = "210px"/></div>
+              <div onClick={deleteItem} className = "deleteBtn"><BtnRedRect name = "Снять с публикации" widd = "140px"/></div>     
             </div>
             
           </div>

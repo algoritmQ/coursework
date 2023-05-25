@@ -29,7 +29,13 @@ import axiosInstance from './api/api';
 export const App = () => {
   const dispatch = useDispatch();
   const [autorized, setAutorized] = useState(useSelector(store => store.user.autorized));
-  
+  const [input, setInput] = useState('');
+  const [click, setClick] = useState(0);
+  const [select, setSelect] = useState('');
+  const [minPrice, setminPrice] = useState('');
+  const [maxPrice, setmaxPrice] = useState('');
+  const [city, setCity] = useState('');
+
   useEffect(() => {
     async function getMe() {
       await axiosInstance.get('api/whoami/')
@@ -50,11 +56,18 @@ export const App = () => {
         <HeaderReg autorized={autorized} setAutorized = {setAutorized}/> : 
         <Header autorized={autorized} setAutorized = {setAutorized} />
       }
-      <Header2/> 
+      <Header2 setInput = {setInput} input = {input} setClick = {setClick} click = {click}
+               select = {select} setSelect = {setSelect} minPrice = {minPrice} setminPrice = {setminPrice}
+               setmaxPrice = {setmaxPrice} city = {city} setCity = {setCity}
+      /> 
       
       <div class = "mainContent">
         <Routes>
-         <Route path = '/MainPage' element = {<MainPage/>} /> 
+         <Route path = '/MainPage' element = {<MainPage city = {city} minPrice={minPrice} maxPrice={maxPrice} 
+                        setminPrice = {setminPrice} setmaxPrice = {setmaxPrice} setCity ={setCity}
+                        setInput = {setInput} input = {input} setClick = {setClick} click = {click}
+                        />} 
+          /> 
          <Route path = '/RegForm' element = {<RegForm/>} />
          <Route path = '/EnterForm' element = {<EnterForm/>} />
          <Route path = '/ViewAdPage/:id' element = {<ViewAdPage/>} />

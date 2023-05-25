@@ -15,7 +15,7 @@ function TitleChatAd(props) {
         </div>            
 
        <div className = "infoBar">
-            <span className = "personName">{chatInfo?.user_1.username === user.username ? chatInfo?.user_2.first_name : chatInfo?.user_1.first_name }</span>
+            <span className = "personName">{chatInfo?.user_1?.username === user?.username ? chatInfo?.user_2.first_name : chatInfo?.user_1?.first_name }</span>
             
        </div>
        <div className = "rightBar">

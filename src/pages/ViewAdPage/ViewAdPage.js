@@ -26,6 +26,8 @@ function ViewAdPage(props) {
     const month = time.getUTCMonth() + 1; //months from 1-12
     const day = time.getUTCDate();
     const year = time.getUTCFullYear();
+    const hours = time.getHours();
+    const minutes = time.getMinutes();
 
   return (
     <div className = "viewAdPage">
@@ -48,13 +50,13 @@ function ViewAdPage(props) {
             </div>
             <div className = "rightTopBar">
                 <span className = "nameAd">{item?.price}, руб.</span>
-                <div className = "sellerBar">
+                <div className = "vap-sellerBar">
                     <span className = "sellerName">{item.user_id?.first_name}</span>
                     {!!(user.username!=item.user_id?.username) && <Link className = "my-link"><BtnBlue50Rect name = "Написать продавцу"/></Link>}
                 </div>
                 <div className = "date-n-place">
                     <span className = "rr">Город {item.user_id?.city}</span>
-                    <span className = "rr">Выложено {day +'.'+ month + "." + year}</span>
+                    <span className = "rr">Выложено {day +'.'+ month + "." + year + " " + hours + ":" + minutes}</span>
                 </div>
             </div>
        </div>

@@ -74,7 +74,7 @@ const Bar = styled.span`
   background-color: rgba(0,0,0,0.7);
 `;
 
-const HamburgerButton = () => {
+const HamburgerButton = (props) => {
   const[zInd, setzInd] = useState(-1);
   const dispatch = useDispatch();
   return (
@@ -87,7 +87,10 @@ const HamburgerButton = () => {
         </MenuButton>
       </div>
       <SearchFormhere style = {{zIndex:zInd}}>
-        <SearchForm/>
+        <SearchForm
+          select = {props.select} setSelect = {props.setSelect} minPrice = {props.minPrice} setminPrice = {props.setminPrice}
+          setmaxPrice = {props.setmaxPrice} maxPrice = {props.maxPrice} city = {props.city} setCity = {props.setCity}
+        />
       </SearchFormhere>
     </>
   );

@@ -29,14 +29,14 @@ function Header({autorized, setAutorized}) {
           <Link className="my-link"><div onClick={() => setzReg(1)}><BtnBlueRounded className = "font-roboto" name="Регистрация"/></div></Link>      
       </div>  
     </div>
-    <div  className = "inactiveDiv" style = {{zIndex:zEnter}}>
-      <div className = "closeForm" onClick={() => setzEnter(-1)}><span>Закрыть</span></div>
+    <div  className = "inactiveDiv" style = {{zIndex:zEnter}} onClick={() => setzEnter(-1)}>
+    <div className = "closeForm" onClick={() => setzEnter(-1)}><span></span></div>
       <div className = "insideBlock" >
         <EnterForm zEnter={zEnter} setzEnter={setzEnter}  autorized={autorized} setAutorized={setAutorized}/>
       </div>     
     </div>
-    <div  className = "inactiveDiv" style = {{zIndex:zReg}}>
-      <div className = "closeForm" onClick={() => setzReg(-1)}><span>Закрыть</span></div>
+    <div  className = "inactiveDiv" style = {{zIndex:zReg}} onClick={() => setzReg(-1)}>
+      <div className = "closeForm" onClick={() => setzReg(-1)}><span></span></div>
       <div className = "insideBlock" >
         <RegForm setzReg = {setzReg}/>
       </div>     

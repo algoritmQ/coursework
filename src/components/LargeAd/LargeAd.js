@@ -12,6 +12,8 @@ function LargeAd(props) {
   const month = time.getUTCMonth() + 1; //months from 1-12
   const day = time.getUTCDate();
   const year = time.getUTCFullYear();
+  const hours = time.getHours();
+  const minutes = time.getMinutes();
   const user = useSelector(store => store.user.user);
   const dispatch = useDispatch();
   const ads = useSelector(store => store.ads.ads);
@@ -42,7 +44,7 @@ function LargeAd(props) {
         <div className = "bottomBar">
             <span>город {props.user_id.city}</span>
             <span> Выложено <span className = "dateTime">
-              {day +'.'+ month + "." + year}
+              {day +'.'+ month + "." + year + " " + hours + ":" + minutes}
               </span></span>
         </div>
       </div>

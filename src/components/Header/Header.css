@@ -55,7 +55,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    cursor:pointer;
+    /* cursor:pointer; */
 }
 .inactiveDiv .closeForm span{
   color:rgba(255, 255, 255, 0.066);

@@ -15,18 +15,39 @@ import axiosInstance from '../../api/api.js';
 function MainPage(props) {
   const dispatch = useDispatch();
   const ads = useSelector(store => store.ads.ads);
-
+ 
   useEffect(() => {
       const fetchAds = async () => {
         const query = props.input ? props.input : '';
-        await axiosInstance.get(`ads_depth/?title=${query}`)
+        const city_filter = props.city ? props.city : '';
+        const minPrice_filter = props.minPrice ? props.minPrice : '';
+        const maxPrice_filter = props.maxPrice ? props.maxPrice : '';
+        //await axiosInstance.get(`ads_depth/?title=${query}&city=${props.city}&min_p=${props.minPrice}&max_p=${props.maxPrice}`)
+        await axiosInstance.get(`ads_depth/?min_p=${minPrice_filter}&max_p=${maxPrice_filter}&city=${city_filter}&title=${query}`)
         .then(response => {
-          dispatch(setAds(response.data.filter(elem => elem.status === 'A')));
+          dispatch(setAds(response.data
+            .filter(elem => elem.status === 'A')));
+            props.setInput('');
+            props.setminPrice('');
+            props.setmaxPrice('');
+            props.setCity('');
         });
+        // document.querySelector('.js-mainSearch').value = "";
+        // document.querySelector('.minPriceInput').value = "";
+        // document.querySelector('.maxPriceInput').value = "";
+        // document.querySelector('.cityInput').value = "";
       }
-  
       fetchAds();
-  }, [dispatch]);
+      
+  }, [dispatch, props.click]);
+
+  {/*
+      .filter(function(elem){
+        elem.status === 'A';
+        elem.city === props.city
+      })
+
+  */}
 
   // setTimeout(() => {
   //   const input = document.querySelector('.js-mainSearch');
