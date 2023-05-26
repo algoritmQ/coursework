@@ -74,10 +74,10 @@ class UserViewSet(viewsets.ModelViewSet):
                 return Response(data=updated_user.data, status=status.HTTP_200_OK)
             return Response(serializer.errors)
 
-    def delete(self, request, *args, **kwargs):
+    def destroy(self, request, *args, **kwargs):
         queryset = Profile.objects.all()
-        if request.data.get('id'):
-            user = queryset.filter(id=request.data.get('id'))
+        if self.get_object().id:
+            user = queryset.filter(id=self.get_object().id)
             if user.count() != 1:
                 return Response(status=status.HTTP_204_NO_CONTENT)
             user.delete()
@@ -117,7 +117,7 @@ class AdDepthViewSet(viewsets.ModelViewSet):
     http_method_names = ['get']
 
     def get_queryset(self):
-        queryset = Ad.objects.all()
+        queryset = Ad.objects.all().order_by('publication_date')
         if self.request.method == 'GET':
             params = self.request.query_params.dict()
             try:
@@ -125,7 +125,7 @@ class AdDepthViewSet(viewsets.ModelViewSet):
             except:
                 pass
             try:
-                queryset = queryset.filter(user_id__city=params['city'])
+                queryset = queryset.filter(user_id__city__incontains=params['city'])
             except:
                 pass
             try:
@@ -219,15 +219,6 @@ class AdViewSet(viewsets.ModelViewSet):
         instance.status = 'S'
         instance.save()
         return Response(status=status.HTTP_200_OK)
-        # queryset = Ad.objects.all()
-        # if instance.id:
-        #     ad = Ad.objects.get(id=instance.id)
-        #     if ad:
-        #         return Response(status=status.HTTP_204_NO_CONTENT)
-        #     ad. = 'S'
-        #     ad.save()
-        #     return Response(status=status.HTTP_200_OK)
-        # return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class ChatDepthViewSet(viewsets.ModelViewSet):
@@ -279,6 +270,8 @@ class ChatViewSet(viewsets.ModelViewSet):
         if data['user_1'] == data['user_2']:
             return Response(status=status.HTTP_400_BAD_REQUEST, data='Same users id')
 
+        decoded_payload = jwt_decode_handler(request.headers.get("Authorization")[7:])
+        auth_user = decoded_payload.get('user_id')
         chat1_exists = Chat.objects.filter(user_1=data['user_1']).filter(user_2=data['user_2'])
         if chat1_exists.count() != 0:
             return Response(status=status.HTTP_200_OK, data=chat1_exists[0].id)
@@ -287,6 +280,7 @@ class ChatViewSet(viewsets.ModelViewSet):
         if chat2_exists.count() != 0:
             return Response(status=status.HTTP_200_OK, data=chat2_exists[0].id)
 
+        data['creator'] = auth_user
         new_chat = ChatSerializer(data=data)
         if new_chat.is_valid():
             new_chat.save()
@@ -328,12 +322,14 @@ class MessageViewSet(viewsets.ModelViewSet):
         if not request.data.get('message_text') or not request.data.get('chat_id'):
             return Response(status=status.HTTP_400_BAD_REQUEST, data='Some data is missing')
         data = request.data
-        data['user_id'] = request.user.id
+        decoded_payload = jwt_decode_handler(request.headers.get("Authorization")[7:])
+        auth_user = decoded_payload.get('user_id')
+        data['user_id'] = auth_user
         new_message = MessageSerializer(data=data)
         chat = Chat.objects.get(id=data['chat_id'])
         if new_message.is_valid():
             new_message.save()
-            addMessageEvent(Message.objects.all().count(), data['chat_id'], chat.user_1.id, chat.user_2.id, data['message_text'])
+            addMessageEvent(int(data['chat_id']), data['user_id'], chat.user_2.id, data['message_text'])
             return Response(data=new_message.data, status=status.HTTP_201_CREATED)
         return Response(new_message.errors)
 
@@ -343,10 +339,3 @@ class MessageViewSet(viewsets.ModelViewSet):
 class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
-
-    # def get_queryset(self):
-    #     queryset = Notification.objects.all()
-    #     if self.request.method == 'GET':
-    #         params = self.request.query_params.dict()
-    #         try:
-    #             queryset = queryset.filter()

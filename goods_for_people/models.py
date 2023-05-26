@@ -35,6 +35,7 @@ class Chat(models.Model):
 
     user_1 = models.ForeignKey(Profile, models.SET_NULL, blank=True, null=True, related_name='buyer')
     user_2 = models.ForeignKey(Profile, models.SET_NULL, blank=True, null=True, related_name='seller')
+    creator = models.ForeignKey(Profile, models.SET_NULL, blank=True, null=True, related_name='creator')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='A')
 
 

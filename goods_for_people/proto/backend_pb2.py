@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rbackend.proto\x12\x04\x63hat\"i\n\x0cMessageEvent\x12\x12\n\nmessage_id\x18\x01 \x01(\x03\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x03\x12\x0e\n\x06user_1\x18\x03 \x01(\x03\x12\x0e\n\x06user_2\x18\x04 \x01(\x03\x12\x14\n\x0cmessage_text\x18\x05 \x01(\t\"$\n\x11GetMessageRequest\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x03\"B\n\x0bNotifyEvent\x12\x0e\n\x06not_id\x18\x01 \x01(\x03\x12\x12\n\nmessage_id\x18\x02 \x01(\x03\x12\x0f\n\x07\x63hat_id\x18\x03 \x01(\x03\"\x0f\n\rEmptyResponse2\x8e\x02\n\x0b\x43hatService\x12<\n\x0f\x61\x64\x64MessageEvent\x12\x12.chat.MessageEvent\x1a\x13.chat.EmptyResponse\"\x00\x12\x42\n\x0fgetMessageEvent\x12\x17.chat.GetMessageRequest\x1a\x12.chat.MessageEvent\"\x00\x30\x01\x12?\n\x12\x64\x65leteMessageEvent\x12\x12.chat.MessageEvent\x1a\x13.chat.EmptyResponse\"\x00\x12<\n\x10notifyNewMessage\x12\x11.chat.NotifyEvent\x1a\x13.chat.EmptyResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rbackend.proto\x12\x04\x63hat\"U\n\x0cMessageEvent\x12\x0f\n\x07\x63hat_id\x18\x02 \x01(\x03\x12\x0e\n\x06user_1\x18\x03 \x01(\x03\x12\x0e\n\x06user_2\x18\x04 \x01(\x03\x12\x14\n\x0cmessage_text\x18\x05 \x01(\t\"$\n\x11GetMessageRequest\x12\x0f\n\x07\x63hat_id\x18\x01 \x01(\x03\"B\n\x0bNotifyEvent\x12\x0e\n\x06not_id\x18\x01 \x01(\x03\x12\x12\n\nmessage_id\x18\x02 \x01(\x03\x12\x0f\n\x07\x63hat_id\x18\x03 \x01(\x03\"\x0f\n\rEmptyResponse2\x8e\x02\n\x0b\x43hatService\x12<\n\x0f\x61\x64\x64MessageEvent\x12\x12.chat.MessageEvent\x1a\x13.chat.EmptyResponse\"\x00\x12\x42\n\x0fgetMessageEvent\x12\x17.chat.GetMessageRequest\x1a\x12.chat.MessageEvent\"\x00\x30\x01\x12?\n\x12\x64\x65leteMessageEvent\x12\x12.chat.MessageEvent\x1a\x13.chat.EmptyResponse\"\x00\x12<\n\x10notifyNewMessage\x12\x11.chat.NotifyEvent\x1a\x13.chat.EmptyResponse\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,13 +22,13 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _globals['_MESSAGEEVENT']._serialized_start=23
-  _globals['_MESSAGEEVENT']._serialized_end=128
-  _globals['_GETMESSAGEREQUEST']._serialized_start=130
-  _globals['_GETMESSAGEREQUEST']._serialized_end=166
-  _globals['_NOTIFYEVENT']._serialized_start=168
-  _globals['_NOTIFYEVENT']._serialized_end=234
-  _globals['_EMPTYRESPONSE']._serialized_start=236
-  _globals['_EMPTYRESPONSE']._serialized_end=251
-  _globals['_CHATSERVICE']._serialized_start=254
-  _globals['_CHATSERVICE']._serialized_end=524
+  _globals['_MESSAGEEVENT']._serialized_end=108
+  _globals['_GETMESSAGEREQUEST']._serialized_start=110
+  _globals['_GETMESSAGEREQUEST']._serialized_end=146
+  _globals['_NOTIFYEVENT']._serialized_start=148
+  _globals['_NOTIFYEVENT']._serialized_end=214
+  _globals['_EMPTYRESPONSE']._serialized_start=216
+  _globals['_EMPTYRESPONSE']._serialized_end=231
+  _globals['_CHATSERVICE']._serialized_start=234
+  _globals['_CHATSERVICE']._serialized_end=504
 # @@protoc_insertion_point(module_scope)

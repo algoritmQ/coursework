@@ -8,7 +8,6 @@ def addMessageEvent(messageId, chatId, user1, user2, messageText):
     client = backend_pb2_grpc.ChatServiceStub(channel)
     # Создание запроса
     request = backend_pb2.MessageEvent(
-        message_id=messageId,
         chat_id=chatId,
         user_1=user1,
         user_2=user2,
